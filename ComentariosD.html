@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentarios</title>
+    <link rel="stylesheet" href="./CSS/CyT_Estilos.css">
+</head>
+<body>
+
+
+    <header>
+        <img src="./LogoDASPO.jpg" alt="Logo de la plataforma" class="logo">
+    </header>
+
+
+    <nav>
+        <ul>
+            <li><a href="./principal.html">Página Principal</a></li>
+            <li><a href="./TestD.html">Test</a></li>
+            <li><a href="./ComentariosD.html">Comentarios</a></li>
+        </ul>
+    </nav>
+
+    <h1>Comentarios</h1>
+
+
+    <form id="comentario-form" onsubmit="return agregarComentario();">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <br><br>
+
+    <label for="comentario">Comentario:</label>
+    <textarea id="comentario" name="comentario" rows="4" cols="50" required></textarea>
+    <br><br>
+
+    <button type="submit">Agregar Comentario</button>
+</form>
+
+
+
+    <div id="success-message" class="success-message" style="display: none;">
+        Respuesta registrada exitosamente.
+    </div>
+
+    <h2>Lista de Comentarios</h2>
+    
+    
+    <ol>
+<!-- Area de comentarios que se van a guardar -->
+    </ol>
+
+    <script>
+        
+        function showSuccessMessage() {
+            document.getElementById("comentario-form").reset();
+            document.getElementById("success-message").style.display = "block"; 
+            setTimeout(function() {
+                document.getElementById("success-message").style.display = "none"; 
+            }, 3000);
+            return false;
+        }
+
+    class Nodo {
+        constructor(nombre, comentario) {
+            this.nombre = nombre;
+            this.comentario = comentario;
+            this.siguiente = null; 
+        }
+    }
+
+    
+    class ListaEnlazada {
+        constructor() {
+            this.cabeza = null; 
+        }
+
+        
+        agregarComentario(nombre, comentario) {
+            const nuevoNodo = new Nodo(nombre, comentario);
+            if (this.cabeza === null) {
+                this.cabeza = nuevoNodo; 
+            } else {
+                let actual = this.cabeza;
+                while (actual.siguiente !== null) {
+                    actual = actual.siguiente; 
+                }
+                actual.siguiente = nuevoNodo; 
+            }
+        }
+
+
+        mostrarComentarios() {
+            let actual = this.cabeza;
+            const comentarios = [];
+            while (actual !== null) {
+                comentarios.push(`${actual.nombre}: ${actual.comentario}`);
+                actual = actual.siguiente;
+            }
+            return comentarios;
+        }
+    }
+
+    
+    const listaComentarios = new ListaEnlazada();
+
+    
+    function agregarComentario() {
+        const nombre = document.getElementById("nombre").value;
+        const comentario = document.getElementById("comentario").value;
+
+        listaComentarios.agregarComentario(nombre, comentario); 
+
+        mostrarListaComentarios(); 
+        document.getElementById("comentario-form").reset(); 
+        return false; 
+    }
+
+    
+    function mostrarListaComentarios() {
+        const listaHTML = document.querySelector("ol"); 
+        listaHTML.innerHTML = "";
+
+        const comentarios = listaComentarios.mostrarComentarios();
+        comentarios.forEach((texto) => {
+            const nuevoElemento = document.createElement("li");
+            nuevoElemento.textContent = texto;
+            listaHTML.appendChild(nuevoElemento);
+        });
+    }
+    </script>
+</body>
+
+</html>

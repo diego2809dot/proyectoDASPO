@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - DASPO</title>
+    <link rel="stylesheet"  href="./CSS/CyT_Estilos.css"></head>
+<body>
+
+
+    <header>
+        <img src="./LogoDASPO.jpg" alt="Logo de la plataforma" class="logo">
+    </header>
+
+
+    <nav>
+        <ul>
+            <li><a href="./principal.html">Pagina principal</a></li>
+            <li><a href="./TestD.html">Test</a></li>
+            <li><a href="./ComentariosD.html">Comentarios</a></li>
+        </ul>
+    </nav>
+
+
+    <div>
+        <h2 style="text-align: center; color: #333;">Test: Evaluación de riesgo de adicción</h2>
+        <form onsubmit="procesarRespuestas(event);">
+            <fieldset class="question-group">
+                <legend>1. ¿Cuántas horas a la semana pasas viendo pornografía online?</legend>
+                <input type="radio" id="p1-op1" name="p1" value="Menos de 1 hora" required>
+                <label for="p1-op1">Menos de 1 hora</label>
+                <input type="radio" id="p1-op2" name="p1" value="1-2 horas">
+                <label for="p1-op2">1-2 horas</label>
+                <input type="radio" id="p1-op3" name="p1" value="2-5 horas">
+                <label for="p1-op3">2-5 horas</label>
+                <input type="radio" id="p1-op4" name="p1" value="Más de 5 horas">
+                <label for="p1-op4">Más de 5 horas</label>
+            </fieldset>
+
+            <fieldset class="question-group">
+                <legend>2. ¿Te sientes ansioso o irritado cuando no puedes acceder a pornografía online?</legend>
+                <input type="radio" id="p2-op1" name="p2" value="Nunca" required>
+                <label for="p2-op1">Nunca</label>
+                <input type="radio" id="p2-op2" name="p2" value="A veces">
+                <label for="p2-op2">A veces</label>
+                <input type="radio" id="p2-op3" name="p2" value="Frecuentemente">
+                <label for="p2-op3">Frecuentemente</label>
+                <input type="radio" id="p2-op4" name="p2" value="Siempre">
+                <label for="p2-op4">Siempre</label>
+            </fieldset>
+
+            <fieldset class="question-group">
+                <legend>3. ¿Has intentado reducir o controlar tu consumo de pornografía online, pero no has podido?</legend>
+                <input type="radio" id="p3-op1" name="p3" value="Nunca" required>
+                <label for="p3-op1">Nunca</label>
+                <input type="radio" id="p3-op2" name="p3" value="A veces">
+                <label for="p3-op2">A veces</label>
+                <input type="radio" id="p3-op3" name="p3" value="Frecuentemente">
+                <label for="p3-op3">Frecuentemente</label>
+                <input type="radio" id="p3-op4" name="p3" value="Siempre">
+                <label for="p3-op4">Siempre</label>
+            </fieldset>
+
+            <fieldset class="question-group">
+                <legend>4. ¿Te has sentido aislado o distante de amigos y familiares debido a tu consumo de pornografía online?</legend>
+                <input type="radio" id="p4-op1" name="p4" value="Nunca" required>
+                <label for="p4-op1">Nunca</label>
+                <input type="radio" id="p4-op2" name="p4" value="A veces">
+                <label for="p4-op2">A veces</label>
+                <input type="radio" id="p4-op3" name="p4" value="Frecuentemente">
+                <label for="p4-op3">Frecuentemente</label>
+                <input type="radio" id="p4-op4" name="p4" value="Siempre">
+                <label for="p4-op4">Siempre</label>
+            </fieldset>
+
+            <fieldset class="question-group">
+                <legend>5. ¿Has experimentado problemas en tus relaciones interpersonales debido a tu consumo de pornografía online?</legend>
+                <input type="radio" id="p5-op1" name="p5" value="Nunca" required>
+                <label for="p5-op1">Nunca</label>
+                <input type="radio" id="p5-op2" name="p5" value="A veces">
+                <label for="p5-op2">A veces</label>
+                <input type="radio" id="p5-op3" name="p5" value="Frecuentemente">
+                <label for="p5-op3">Frecuentemente</label>
+                <input type="radio" id="p5-op4" name="p5" value="Siempre">
+                <label for="p5-op4">Siempre</label>
+            </fieldset>
+
+            <button type="submit">Enviar Respuestas</button>
+        </form>
+
+        <button onclick="mostrarRespuestas()">Mostrar Resultados</button>
+        
+        <div id="resultados"></div>
+    
+    </div>
+
+    <script>
+        
+        const respuestasUsuarios = [];
+    
+        
+        function procesarRespuestas(event) {
+            event.preventDefault(); 
+    
+            
+            const respuestasActuales = [];
+            for (let i = 1; i <= 5; i++) {
+                const respuesta = document.querySelector(`input[name="p${i}"]:checked`);
+                if (respuesta) {
+                    respuestasActuales.push(respuesta.value);
+                }
+            }
+            respuestasUsuarios.push(respuestasActuales);
+    
+            
+            console.log("Respuestas del usuario actual:", respuestasActuales);
+            console.log("Todas las respuestas:", respuestasUsuarios);
+    
+            
+            document.querySelector("form").reset();
+            alert("¡Tus respuestas se han registrado exitosamente!");
+        }
+
+        function mostrarRespuestas() {
+        const contenedorResultados = document.getElementById("resultados");
+        contenedorResultados.innerHTML = ""; 
+
+        respuestasUsuarios.forEach((respuestas, index) => {
+            const parrafo = document.createElement("p");
+            parrafo.textContent = `Usuario ${index + 1}: ${respuestas.join(", ")}`;
+            contenedorResultados.appendChild(parrafo);
+        });
+    }
+    </script>
+    
+</body>
+</html>
