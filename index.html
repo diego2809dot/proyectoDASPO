@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DASPO - Inicio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}" />
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">DASPO</div>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+        <li><a href="{{ url_for('quiz') }}">Test</a></li>
+        <li><a href="{{ url_for('foro') }}">Foro</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#chat">Chat</a></li>
+      </ul>
+    </nav>
+    <button id="modo-toggle">Modo Claro/Oscuro</button>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Bienvenido a DASPO</h1>
+      <p>Tu espacio de apoyo y orientación sobre la adicción a la pornografía.</p>
+      <div id="frase-motivacional"></div>
+    </section>
+
+    <section id="logros">
+      <h2>Tus Logros</h2>
+      <ul id="lista-logros">
+        <li>No has desbloqueado logros aún.</li>
+      </ul>
+    </section>
+
+    <section id="mapa-ayuda">
+      <h2>Mapa de ayuda (Simulado)</h2>
+      <img src="{{ url_for('static', filename='img/mapa_mexico_simulado.png') }}" alt="Mapa de ayuda en México" class="mapa" />
+    </section>
+
+    <section id="mitos-realidades">
+      <h2>Mitos y Realidades</h2>
+      <div class="tarjetas">
+        <div class="tarjeta">
+          <h3>Mito</h3>
+          <p>La pornografía no tiene consecuencias reales.</p>
+          <h3>Realidad</h3>
+          <p>Puede generar adicción, afectar relaciones y salud mental.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>Mito</h3>
+          <p>Todos lo hacen, así que es normal.</p>
+          <h3>Realidad</h3>
+          <p>La normalización no implica que sea saludable o recomendable.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios">
+      <h2>Testimonios Anónimos</h2>
+      <blockquote>"Gracias a DASPO, me sentí escuchado por primera vez."</blockquote>
+      <blockquote>"El test fue el primer paso para entender mi situación."</blockquote>
+    </section>
+
+    <section id="recursos">
+      <h2>Recursos</h2>
+      <ul>
+        <li><a href="{{ url_for('static', filename='recursos/guia_superacion.pdf') }}" download>Guía para superar la adicción</a></li>
+        <li><a href="{{ url_for('static', filename='recursos/infografia_consecuencias.pdf') }}" download>Infografía: Consecuencias del consumo</a></li>
+      </ul>
+    </section>
+
+    <section id="chat">
+      <h2>Chat Anónimo</h2>
+      <div id="chat-box">
+        <div id="chat-log"></div>
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." />
+        <button onclick="enviarMensaje()">Enviar</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DASPO. Todos los derechos reservados.</p>
+  </footer>
+</body>
+
+</html>
