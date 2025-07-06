@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foro DASPO</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}" />
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">DASPO</div>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+        <li><a href="{{ url_for('quiz') }}">Test</a></li>
+        <li><a href="{{ url_for('foro') }}">Foro</a></li>
+
+        {% if session.get('usuario') %}
+          <li><span style="color: #94d2bd;">Bienvenido, {{ session['usuario'] }}</span></li>
+          <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Iniciar sesión</a></li>
+          <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
+        {% endif %}
+      </ul>
+
+    </nav>
+    <button id="modo-toggle">Modo Claro/Oscuro</button>
+  </header>
+
+  <main>
+    <section>
+      <h1>Foro DASPO</h1>
+      <form method="post" action="{{ url_for('foro') }}">
+        <input type="text" name="nombre" placeholder="Tu nombre (opcional)" required><br>
+        <textarea name="mensaje" rows="4" cols="50" placeholder="Escribe tu comentario..." required></textarea><br>
+        <button type="submit">Publicar</button>
+      </form>
+
+      {% if comentarios %}
+        <div id="foro">
+          <h2>Comentarios recientes</h2>
+          <ul>
+            {% for c in comentarios %}
+              <li><strong>{{ c.nombre }}:</strong> {{ c.mensaje }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% else %}
+        <p>No hay comentarios aún. ¡Sé el primero en participar!</p>
+      {% endif %}
+    </section>
+
+    <section>
+      <h2>Mitos y realidades</h2>
+      <div class="tarjetas">
+        <div class="tarjeta">
+          <strong>Mito:</strong> La pornografía no causa daño.<br>
+          <strong>Realidad:</strong> Puede afectar negativamente las relaciones y la salud mental.
+        </div>
+        <div class="tarjeta">
+          <strong>Mito:</strong> Solo los hombres consumen pornografía.<br>
+          <strong>Realidad:</strong> Afecta a personas de todos los géneros.
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

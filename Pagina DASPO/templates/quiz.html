@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test DASPO</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}" />
+  <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">DASPO</div>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+        <li><a href="{{ url_for('quiz') }}">Test</a></li>
+        <li><a href="{{ url_for('foro') }}">Foro</a></li>
+
+        {% if session.get('usuario') %}
+          <li><span style="color: #94d2bd;">Bienvenido, {{ session['usuario'] }}</span></li>
+          <li><a href="{{ url_for('logout') }}">Cerrar sesión</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}">Iniciar sesión</a></li>
+          <li><a href="{{ url_for('registro') }}">Registrarse</a></li>
+        {% endif %}
+      </ul>
+
+    </nav>
+    <button id="modo-toggle">Modo Claro/Oscuro</button>
+  </header>
+
+  <main>
+    <section class="quiz">
+      <h1>Autoevaluación DASPO</h1>
+      <form id="form-quiz">
+        <p>1. ¿Sientes que el consumo de pornografía interfiere con tus actividades diarias?</p>
+        <label><input type="radio" name="q1" value="1" required> Sí</label>
+        <label><input type="radio" name="q1" value="0"> No</label>
+
+        <p>2. ¿Has intentado dejar de consumir sin éxito?</p>
+        <label><input type="radio" name="q2" value="1" required> Sí</label>
+        <label><input type="radio" name="q2" value="0"> No</label>
+
+        <p>3. ¿Te sientes culpable después de consumir?</p>
+        <label><input type="radio" name="q3" value="1" required> Sí</label>
+        <label><input type="radio" name="q3" value="0"> No</label>
+
+        <br /><br />
+        <button type="submit">Enviar</button>
+      </form>
+      <div id="resultado-quiz"></div>
+    </section>
+  </main>
+</body>
+
+</html>
